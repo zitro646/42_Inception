@@ -1,0 +1,13 @@
+//To create an image
+docker build -t <image_name>:<tag> <PATH>
+//To list images
+docker image ls [OPTIONS] [REPOSITORY[:TAG]]
+
+//To stop images
+
+
+//To remove an image
+docker rmi -f <your-image-id>
+
+//To remove multiple images
+docker rmi -f $(docker images -q)
