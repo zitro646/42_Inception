@@ -1,6 +1,6 @@
 #Getting base image
 
-FROM debian
+FROM debian:buster
 
 MAINTAINER mortiz-d
 
