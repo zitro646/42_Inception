@@ -15,6 +15,7 @@ SRC = main.cpp  #mutantstack.cpp
 # RULES #
 all:
 	$(CYAN) Creating IMAGES $(RESET)
+	$(CYAN) IMAGES Created $(RESET)
 ##RULES
 $(MAKE): make
 

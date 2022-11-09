@@ -1,10 +1,17 @@
+sudo mount -t vboxsf 42_Inception /home/jk/Documents/mac_shared
+
+
+//To install docker app
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+
 //To create an image
-docker build -t <image_name>:<tag> <PATH>
+docker build -t <image_name>:<tag> <PAT H>
 //To list images
 docker image ls [OPTIONS] [REPOSITORY[:TAG]]
 
 //To stop images
-
+docker exec <containerId> stop
 
 //To remove an image
 docker rmi -f <your-image-id>
