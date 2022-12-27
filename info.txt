@@ -13,13 +13,21 @@ sudo sh get-docker.sh
 //Continers
 
 
+//To create a docker (we execute an image)
+sudo docker run <> 
 
+//To list containers
+docker containers ls
+-q //to list images
 
 //To stop a container
 docker exec <containerId> stop
 
 //To remove all containers
 docker rm  $(docker container ls -q -a)
+
+
+
 
 //IMAGES
 
@@ -30,8 +38,7 @@ docker build -t <image_name>:<tag> <PATH>
 docker image ls [OPTIONS] [REPOSITORY[:TAG]]
 -q //to list images
 
-//To execute an image
-sudo docker run c741fbf7a865
+
 
 //To remove an image
 docker rmi -f <your-image-id>
