@@ -1,20 +1,41 @@
-sudo mount -t vboxsf 42_Inception /home/jk/Documents/mac_shared
+//This mounts a file on the VM with the computer -> https://www.youtube.com/watch?v=YSLNqXxyUtk
+sudo mount -t vboxsf <File_name> <VM dir>
+sudo mount -t vboxsf 42_Inception /home/mortiz-d/42
 
+//remote access
+ssh mortiz-d@127.0.0.1 -p 4242
 
 //To install docker app
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 
+
+//Continers
+
+
+
+
+//To stop a container
+docker exec <containerId> stop
+
+//To remove all containers
+docker rm  $(docker container ls -q -a)
+
+//IMAGES
+
 //To create an image
-docker build -t <image_name>:<tag> <PAT H>
+docker build -t <image_name>:<tag> <PATH>
+
 //To list images
 docker image ls [OPTIONS] [REPOSITORY[:TAG]]
+-q //to list images
 
-//To stop images
-docker exec <containerId> stop
+//To execute an image
+sudo docker run c741fbf7a865
 
 //To remove an image
 docker rmi -f <your-image-id>
 
-//To remove multiple images
+//to remove all images
 docker rmi -f $(docker images -q)
+ 
