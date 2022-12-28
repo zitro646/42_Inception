@@ -13,32 +13,40 @@ DIR = /file1
 SRC = /
 
 # RULES #
-all:
-	$(CYAN) Creating IMAGES $(RESET)
-	sudo docker build -t inception:image_1 ./file1
-	sudo docker build -t inception:image_2 ./file2
-	$(GREEN) IMAGES Created $(RESET)
-##RULES
+
+
+all: images
+	$(CYAN) RUNNING IMAGES $(RESET)
+	sudo docker run $(shell sudo docker images inception:mysql -q)
+#	sudo docker run $(shell sudo docker images inception:image_2 -q)
+	$(GREEN) DOCKERFILE EXECUTED $(RESET)
+
 $(MAKE): make
+	
+images:
+	$(CYAN) Creating IMAGES $(RESET)
+	sudo docker build -t inception:mysql ./DDBB
+#	sudo docker build -t inception:image_2 ./file2
+	$(GREEN) IMAGES Created $(RESET)
 
-list:
+ilist:
 	$(CYAN) IMAGE LIST $(RESET)
-	sudo docker images
+	sudo docker images -a
 
-#list:
-#	$(CYAN) IMAGE LIST $(RESET)
-#	sudo docker image ls -q
-#LIST = $(docker images -q)
+clist:
+	$(CYAN) CONTAINER LIST $(RESET)
+	sudo docker container ls -a
 
 clean:
+	sudo docker rmi -f $(shell sudo docker images -q)
 #	Erase files	Image	
-	sudo docker rmi -f $(shell sudo docker images inception -q)
+#	sudo docker rmi -f $(shell sudo docker images inception -q)
 #	Erase Debian Image	
-	sudo docker rmi -f $(shell sudo docker images debian -q)
-#$(docker image -q)
+#	sudo docker rmi -f $(shell sudo docker images debian -q)
+
 
 fclean: clean
 
 re: fclean all
 
-PHONY.: all clean fclean re list
+PHONY.: all clean fclean re ilist clist image

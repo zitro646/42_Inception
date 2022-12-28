@@ -17,7 +17,7 @@ sudo sh get-docker.sh
 sudo docker run <> 
 
 //To list containers
-docker containers ls
+docker container ls
 -q //to list images
 
 //To stop a container
