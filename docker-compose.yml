@@ -1,0 +1,11 @@
+version : "3"
+services :
+  mariadb :  
+    build : "./srcs/mysql"
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_ROOT_PASSWORD: 'pass'
+    ports :
+      - "3306:3306"
+    volumes :
+      - ./srcs/mysql/stored_data:/var/lib/mysql/

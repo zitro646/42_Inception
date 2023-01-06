@@ -46,3 +46,27 @@ docker rmi -f <your-image-id>
 //to remove all images
 docker rmi -f $(docker images -q)
  
+
+
+version : "3"
+services :
+  wordpress :
+    image : wordpress
+    ports :
+      - "8089:80"
+    depens_on :
+      - mysql
+    enviroment :    
+      WORDPRESS_DB_HOST : mysql
+      WORDPRESS_DB_USER : root
+      WORDPRESS_DB_PASSWORD : 'pass'
+      WORDPRESS_DB_NAME : wordpress
+  mysql :
+    image : "mysql:5.7"
+    enviroment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_ROOT_PASSWORD: 'pass'
+    volumes :
+      - ./mysql:/var/lib/mysql
+
+//docker exec -it inception-mariaDB  bash
