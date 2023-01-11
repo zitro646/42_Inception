@@ -36,13 +36,13 @@ SRC = /
 
 all:
 	$(CYAN) RUNNING DOCKER-COMPOSE $(RESET)
-	docker-compose up -d
+	docker compose up -d
 	$(GREEN) DOCKER COMPOSE-EXECUTED $(RESET)
 
 $(MAKE): make
 
 ps:
-	docker-compose ps
+	docker compose ps
 
 clean:
 	$(PURPLE) CLEANING DOCKER-COMPOS $(RESET)

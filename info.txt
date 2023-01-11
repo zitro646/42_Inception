@@ -54,19 +54,46 @@ services :
     image : wordpress
     ports :
       - "8089:80"
-    depens_on :
+    depends_on :
       - mysql
-    enviroment :    
+    environment :    
       WORDPRESS_DB_HOST : mysql
       WORDPRESS_DB_USER : root
       WORDPRESS_DB_PASSWORD : 'pass'
       WORDPRESS_DB_NAME : wordpress
   mysql :
     image : "mysql:5.7"
-    enviroment:
+    environment:
       MYSQL_DATABASE: wordpress
       MYSQL_ROOT_PASSWORD: 'pass'
     volumes :
       - ./mysql:/var/lib/mysql
 
-//docker exec -it inception-mariaDB  bash
+//Bueno
+
+version : "3"
+services :
+  wordpress :
+    image : wordpress
+    ports :
+      - "8089:80"
+    depends_on :
+      - mariadb
+    environment :    
+      WORDPRESS_DB_HOST : mysql
+      WORDPRESS_DB_USER : root
+      WORDPRESS_DB_PASSWORD : 'pass'
+      WORDPRESS_DB_NAME : wordpress
+  mariadb :  
+    build : "./srcs/mysql"
+#    image : mysql
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_ROOT_PASSWORD: 'pass'
+    volumes :
+      - ./srcs/mysql/stored_data:/var/lib/mysql/
+
+
+//docker run -d --name DataBase <ID_IMAGE>
+docker run -d --name DataBase --volume /home/mortiz-d/proyects/42_Intra/stored_data:/archivo_prueba <ID_IMAGE>
+//docker exec -it DataBase  bash
