@@ -1,10 +1,24 @@
 version : "3"
 services :
+  wordpress :
+    build : "./srcs/wordpress"
+    container_name : wordpress
+    ports :
+      - "8089:80"
+    depends_on :
+      - mariadb
+    environment :    
+      WORDPRESS_DB_HOST : mysql
+      WORDPRESS_DB_USER : root
+      WORDPRESS_DB_PASSWORD : 'pass'
+      WORDPRESS_DB_NAME : wordpress
   mariadb :  
     build : "./srcs/mysql"
-#    image : mysql
+    container_name : mariadb
     environment:
       MYSQL_DATABASE: wordpress
       MYSQL_ROOT_PASSWORD: 'pass'
     volumes :
-      - "./srcs/permanent_data/mysql:/archivo_prueba"
+      - mysql:/var/lib/mysql
+volumes:
+  mysql :

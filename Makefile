@@ -20,6 +20,7 @@ PURPLE = @echo "\033[0;35m"
 CYAN = @echo "\033[0;36m"
 RESET = "\033[1;0m"
 
+LIGHT_GRAY = @echo "\033[1;37m"
 LIGHT_GREEN = @echo "\033[1;32m"
 LIGHT_CYAN = @echo "\033[1;36m"
 LIGHT_PURPLE = @echo "\033[1;35m"
@@ -36,17 +37,30 @@ SRC = /
 
 all:
 	$(CYAN) RUNNING DOCKER-COMPOSE $(RESET)
-	docker compose up -d
+	sudo docker compose up -d
 	$(GREEN) DOCKER COMPOSE-EXECUTED $(RESET)
 
 $(MAKE): make
 
+purge:
+	sudo docker compose down
+	sudo docker rmi $(shell sudo docker image ls -q)
+	sudo docker system prune
+
 ps:
-	docker compose ps
+	sudo docker compose ps
+
+list:
+	$(YELLOW) DOCKER IMAGE LIST $(RESET)
+	sudo docker image ls -a
+	$(ORANGE) DOCKER IMAGE LIST $(RESET)
+	sudo docker container ls -a
+	$(LIGHT_GRAY) DOCKER VOLUME LIST $(RESET)
+	sudo docker volume ls
 
 clean:
 	$(PURPLE) CLEANING DOCKER-COMPOS $(RESET)
-	docker compose down
+	sudo docker compose down
 	$(LIGHT_PURPLE) DOCKER-COMPOS CLEANED $(RESET)
 
 
@@ -54,4 +68,4 @@ fclean: clean
 
 re: fclean all
 
-PHONY.: all clean fclean re ps
+PHONY.: all clean fclean re ps list purge
