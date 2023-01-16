@@ -1,5 +1,15 @@
 version : "3"
 services :
+  mariadb :  
+    build : "./srcs/mysql"
+    container_name : mariadb
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_ROOT_PASSWORD: 'pass'
+    volumes :
+      - mysql:/var/lib/mysql
+    networks:
+      - database
   wordpress :
     build : "./srcs/wordpress"
     container_name : wordpress
@@ -12,13 +22,9 @@ services :
       WORDPRESS_DB_USER : root
       WORDPRESS_DB_PASSWORD : 'pass'
       WORDPRESS_DB_NAME : wordpress
-  mariadb :  
-    build : "./srcs/mysql"
-    container_name : mariadb
-    environment:
-      MYSQL_DATABASE: wordpress
-      MYSQL_ROOT_PASSWORD: 'pass'
-    volumes :
-      - mysql:/var/lib/mysql
+    networks:
+      - database
 volumes:
   mysql :
+networks:
+  database:
