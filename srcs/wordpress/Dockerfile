@@ -5,12 +5,16 @@ FROM debian:buster
 
 LABEL MAINTAINER=mortiz-d
 
-RUN mkdir wptest
+RUN mkdir wptest 
+
+COPY script.sh /usr/local/bin/
+
+RUN chmod +x /usr/local/bin/script.sh
 # Actualizo e instalo los paquetes necesarios
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y curl && \
-    apt-get install -y apache2 php php-mysql libapache2-mod-php mariadb-client
+    apt-get install -y apache2 php php-mysql libapache2-mod-php mariadb-client net-tools
 
 # Descargo y monto WordPress manualmente
 #RUN curl https://wordpress.org/latest.tar.gz -o latest.tar.gz && \
@@ -26,6 +30,14 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 #--allow-root --path=/var/www/html
 RUN wp core download --allow-root --path=wptest
 
-#CMD cat /etc/mysql/my.cnf
+#CMD ["/usr/local/bin/script.sh"]
+#mysql -u dbuser_name -h database_servername -p
+#CMD mysql -u root -h 42_mariadb -p
+
+CMD ["sh","/usr/local/bin/script.sh"]
+#Inicializo MYSQL client
+#CMD mysqladmin -u root -p status
+
+
 #Creo el archivo config desde WP CLI
-#CMD wp config create --allow-root --path=/wptest --dbname=CLIENTS --dbuser=root
+#CMD wp config create --allow-root --path=/wptest --dbname=CLIENTS --dbuser=root --dbhost=mariadb
