@@ -36,8 +36,11 @@ RUN wp core download --allow-root --path=wptest
 
 CMD ["sh","/usr/local/bin/script.sh"]
 #Inicializo MYSQL client
+#mysql -u pepe -ppass -h mariadb
 #CMD mysqladmin -u root -p status
 
 
+
 #Creo el archivo config desde WP CLI
-#CMD wp config create --allow-root --path=/wptest --dbname=CLIENTS --dbuser=root --dbhost=mariadb
+#wp config create --allow-root --path=/wptest --dbname=CLIENTS --dbuser=pepe --dbhost=mariadb --dbpass=pass
+#CMD wp config create --allow-root --path=/wptest --dbnaame=CLIENTS --dbuser=root --dbhost=mariadb
