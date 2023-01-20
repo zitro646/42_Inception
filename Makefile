@@ -44,9 +44,9 @@ $(MAKE): make
 
 purge:
 	sudo docker compose down
-	sudo docker system prune
+	sudo docker system prune -f
 	sudo docker rmi $(shell sudo docker image ls -q)
-#	sudo docker volume rm $(shell sudo docker volume ls -q)
+	sudo docker volume rm $(shell sudo docker volume ls -q)
 
 ps:
 	sudo docker compose ps

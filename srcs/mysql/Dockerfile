@@ -16,10 +16,11 @@ RUN ./config.sh
 # Actualizo e instalo los paquetes necesarios
 RUN apt-get update -y && apt-get upgrade -y && apt-get install mariadb-server -y
 
-#RUN mysql_secure_installation
 COPY ./50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
 #Inicio mariadb injectandole el .sql
 RUN	service mysql start && mysql < input_data/test.sql
+
+#RUN mysql_secure_installation
 
 CMD ["mysqld"]
