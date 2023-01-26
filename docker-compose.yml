@@ -21,12 +21,26 @@ services :
     env_file: .env
     restart : "always"
     ports :
-      - "8089:80"
+      - "8008:80"
     depends_on :
       - mariadb      
     networks:
       - database
+  nginx :  
+    build :
+      context : "./srcs/nginx"
+    container_name : nginx
+    links :
+      - wordpress
+    ports :
+      - "8000:80"
 volumes:
   mysql :
 networks:
   database:
+
+
+#nginx_test :  
+#    image : nginx:latest
+#    container_name : nginx_test
+    

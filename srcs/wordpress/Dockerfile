@@ -5,36 +5,44 @@ FROM debian:buster
 
 LABEL MAINTAINER=mortiz-d
 
-RUN mkdir wptest 
-
 COPY script.sh /usr/local/bin/
 
 RUN chmod +x /usr/local/bin/script.sh
+
 # Actualizo e instalo los paquetes necesarios
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y curl && \
-    apt-get install -y apache2 php php-mysql libapache2-mod-php mariadb-client net-tools
-
-# Descargo y monto WordPress manualmente
-#RUN curl https://wordpress.org/latest.tar.gz -o latest.tar.gz && \
-#    tar -xzvf latest.tar.gz && \
-#    rm latest.tar.gz && \
-#    mv wordpress /var/www/html/ && \
-#    chown -R www-data:www-data /var/www/html/wordpress
+    apt-get install -y php7.3 php7.3-fpm php7.3-mysql mariadb-client
+#php-fpm php-mysql
 
 # Descargo Wordpress CLI
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
 
-#Descargo wordpress desde WP CLI
-#--allow-root --path=/var/www/html
-RUN wp core download --allow-root --path=wptest
+RUN mkdir var/www/ && mkdir var/www/html && mkdir var/www/html/wp_server
 
-#CMD ["/usr/local/bin/script.sh"]
-#mysql -u dbuser_name -h database_servername -p
-#CMD mysql -u root -h 42_mariadb -p
+#--path=/wptest
+
 
 CMD ["sh","/usr/local/bin/script.sh"]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #Inicializo MYSQL client
 #mysql -u pepe -ppass -h mariadb
 #CMD mysqladmin -u root -p status
