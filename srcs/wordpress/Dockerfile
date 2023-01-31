@@ -14,18 +14,19 @@ RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y curl && \
     apt-get install -y php7.3 php7.3-fpm php7.3-mysql mariadb-client
-#php-fpm php-mysql
 
 # Descargo Wordpress CLI
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
 
-RUN mkdir var/www/ && mkdir var/www/html && mkdir var/www/html/wp_server
+#Copio archivos importantes para la configuracion a posteriori
+COPY config_files/index.php /var/www/html/index.php
+COPY config_files/www.conf /etc/php/7.3/fpm/pool.d
 
-#--path=/wptest
+RUN mkdir var/www/html/wp_server
+RUN mkdir -p /run/php/
 
 
 CMD ["sh","/usr/local/bin/script.sh"]
-
 
 
 

@@ -14,33 +14,36 @@ services :
     volumes :
       - mysql:/var/lib/mysql
     networks:
-      - database
+      - 42_network
   wordpress :
     build : "./srcs/wordpress"
     container_name : wordpress
     env_file: .env
-    restart : "always"
-    ports :
-      - "8008:80"
     depends_on :
-      - mariadb      
+      - mariadb
+    volumes :
+      - web:/var/www/html
     networks:
-      - database
+      - 42_network
   nginx :  
     build :
       context : "./srcs/nginx"
     container_name : nginx
+    depends_on :
+      - wordpress 
     links :
       - wordpress
+    volumes :
+      - web:/var/www/html
+    networks:
+      - 42_network
     ports :
       - "8000:80"
 volumes:
   mysql :
+  web:
 networks:
-  database:
+  42_network:
 
-
-#nginx_test :  
-#    image : nginx:latest
-#    container_name : nginx_test
+#    restart : "always"
     

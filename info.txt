@@ -5,7 +5,7 @@ sudo mount -t vboxsf 42_Inception /home/mortiz-d/42
 //remote access
 ssh mortiz-d@127.0.0.1 -p 4242
 
-//To install docker app
+//To install docker app fast
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 
@@ -28,7 +28,6 @@ docker rm  $(docker container ls -q -a)
 
 
 
-
 //IMAGES
 
 //To create an image
@@ -45,53 +44,6 @@ docker rmi -f <your-image-id>
 
 //to remove all images
 docker rmi -f $(docker images -q)
- 
-
-
-version : "3"
-services :
-  wordpress :
-    image : wordpress
-    ports :
-      - "8089:80"
-    depends_on :
-      - mysql
-    environment :    
-      WORDPRESS_DB_HOST : mysql
-      WORDPRESS_DB_USER : root
-      WORDPRESS_DB_PASSWORD : 'pass'
-      WORDPRESS_DB_NAME : wordpress
-  mysql :
-    image : "mysql:5.7"
-    environment:
-      MYSQL_DATABASE: wordpress
-      MYSQL_ROOT_PASSWORD: 'pass'
-    volumes :
-      - ./mysql:/var/lib/mysql
-
-//Bueno
-
-version : "3"
-services :
-  wordpress :
-    image : wordpress
-    ports :
-      - "8089:80"
-    depends_on :
-      - mariadb
-    environment :    
-      WORDPRESS_DB_HOST : mysql
-      WORDPRESS_DB_USER : root
-      WORDPRESS_DB_PASSWORD : 'pass'
-      WORDPRESS_DB_NAME : wordpress
-  mariadb :  
-    build : "./srcs/mysql"
-#    image : mysql
-    environment:
-      MYSQL_DATABASE: wordpress
-      MYSQL_ROOT_PASSWORD: 'pass'
-    volumes :
-      - ./srcs/mysql/stored_data:/var/lib/mysql/
 
 
 //docker run -d --name DataBase <ID_IMAGE>
