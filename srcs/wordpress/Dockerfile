@@ -19,10 +19,11 @@ RUN apt-get update && \
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
 
 #Copio archivos importantes para la configuracion a posteriori
-COPY config_files/index.php /var/www/html/index.php
+COPY config_files/index.php /var/www/html/wp_server/new_index.php
+COPY config_files/prueba.html /var/www/html/prueba.html
 COPY config_files/www.conf /etc/php/7.3/fpm/pool.d
 
-RUN mkdir var/www/html/wp_server
+#RUN mkdir -p var/www/html/wp_server
 RUN mkdir -p /run/php/
 
 
