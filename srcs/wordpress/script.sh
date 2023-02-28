@@ -3,7 +3,7 @@
 #else
 #  echo "Directory does not exist"
 #fi
-#seed -i "s/listen = 127.0.0.1:9000/listen = 0.0.0.0:9000/g" /etc/php/7.3/fpm/pool.d/www.conf
+#seed -i "s/listen = /run/php/php7.3-fpm.sock/listen = 0.0.0.0:9000/g" /etc/php/7.3/fpm/pool.d/www.conf
 wp core download --allow-root --path=var/www/html/wp_server
 wp config create --allow-root --dbname=${MYSQL_DATABASE_NAME} --dbuser=${MYSQL_ADMIN_USER} --dbpass=${MYSQL_USER_PASSWORD} --dbhost=mariadb --path=var/www/html/wp_server
 #chmod 644 /var/www/html/wp_server/wp-config.php
