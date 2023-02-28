@@ -6,6 +6,8 @@ NGINX
 https://www.nginx.com/resources/wiki/start/
 https://serverfault.com/questions/527630/difference-in-sites-available-vs-sites-enabled-vs-conf-d-directories-nginx
 
+SSL
+https://curl.se/docs/sslcerts.html
 
 WORDPRESS
 https://make.wordpress.org/cli/handbook/how-to-install/

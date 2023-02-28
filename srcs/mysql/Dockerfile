@@ -1,4 +1,3 @@
-#Getting base image
 #MySQL
 
 FROM debian:buster
@@ -14,8 +13,9 @@ COPY ./config.sh /config.sh
 COPY ./database_config.sql /database_config.sql
 RUN chmod +x config.sh
 RUN ./config.sh
+
 # Actualizo e instalo los paquetes necesarios
-RUN apt-get update -y && apt-get upgrade -y && apt-get install mariadb-server -y
+RUN apt-get update -y && apt-get upgrade -y && apt-get install mariadb-server net-tools -y
 
 COPY ./50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 

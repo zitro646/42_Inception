@@ -49,3 +49,11 @@ docker rmi -f $(docker images -q)
 //docker run -d --name DataBase <ID_IMAGE>
 docker run -d --name DataBase --volume /home/mortiz-d/proyects/42_Intra/stored_data:/archivo_prueba <ID_IMAGE>
 //docker exec -it DataBase  bash
+
+//Para ver si se han abierto los puertos correctamente
+sudo netstat -tlnp | grep <numero puerto>
+ 
+//Para pillar info del server
+ifconfig
+curl -I <mi ip>:443
+
