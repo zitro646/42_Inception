@@ -1,6 +1,4 @@
-#Getting base image
 #NGIX
-
 FROM debian:buster
 
 RUN apt-get update && apt-get install -y nginx net-tools openssl

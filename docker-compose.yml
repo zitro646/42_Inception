@@ -10,7 +10,7 @@ services :
         MYSQL_ROOT_PASSWORD : $MYSQL_ROOT_PASSWORD
     container_name : mariadb
     env_file: .env
-    #restart : "always"
+    restart : "always"
     volumes :
       - mysql:/var/lib/mysql
     networks:
@@ -19,7 +19,7 @@ services :
     build : "./srcs/wordpress"
     container_name : wordpress
     env_file: .env
-    #restart : "always"
+    restart : "always"
     depends_on :
       - mariadb
     volumes :
@@ -34,7 +34,7 @@ services :
       - wordpress 
     links :
       - wordpress
-    #restart : "always"
+    restart : "always"
     volumes :
       - web:/var/www/html
     networks:

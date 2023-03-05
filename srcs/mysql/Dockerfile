@@ -15,6 +15,4 @@ RUN chmod +x config.sh && ./config.sh
 #Inicio mariadb injectandole el .sql
 RUN	service mysql start && mysql < database.sql 
 
-#RUN mysql_secure_installation
-
 CMD ["mysqld"]
