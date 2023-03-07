@@ -7,3 +7,5 @@ echo "ALTER USER root@localhost IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' ;" >> dat
 sed -i "s/127.0.0.1/0.0.0.0/" /etc/mysql/mariadb.conf.d/50-server.cnf 
 #Por seguridad añadida eliminamos las bases de datos imnecesarias
 echo 'DROP DATABASE IF EXISTS test;'  >> database.sql 
+#Notificamos en los logs que hemos terminado
+echo "\033[32mMYSQL set up finished\033[0m"
