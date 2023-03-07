@@ -3,7 +3,7 @@ FROM debian:buster
 
 LABEL MAINTAINER=mortiz-d
 
-COPY script.sh /usr/local/bin/
+COPY ./tools/script.sh /usr/local/bin/
 
 RUN chmod +x /usr/local/bin/script.sh
 
