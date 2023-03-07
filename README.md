@@ -23,3 +23,7 @@ https://stackoverflow.com/questions/47664107/docker-mount-to-folder-overriding-c
 https://refine.dev/blog/docker-build-args-and-env-vars/
 https://docs.docker.com/compose/compose-file/compose-file-v3/
 https://docs.docker.com/engine/reference/commandline/run/#-publish-or-expose-port--p---expose
+
+
+REDIS
+https://wetopi.com/redis-object-cache-for-wordpress/
