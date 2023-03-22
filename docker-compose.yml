@@ -1,4 +1,4 @@
-version : "3"
+version : "3.5"
 services :
   mariadb :  
     build :
@@ -10,13 +10,14 @@ services :
         MYSQL_ROOT_PASSWORD : $MYSQL_ROOT_PASSWORD
     container_name : mariadb
     env_file: .env
-    restart : "always"
+    #restart : "always"
     volumes :
       - mysql:/var/lib/mysql
     networks:
       - 42_network
   wordpress :
-    build : "./srcs/wordpress"
+    build : 
+      context : "./srcs/wordpress"
     container_name : wordpress
     env_file: .env
     restart : "always"
@@ -43,6 +44,16 @@ services :
       - "443:443"
 volumes:
   mysql :
+    driver: local
+    driver_opts:
+      o: 'bind'
+      type : "none"
+      device: '/home/mortiz-d/data/mysql'
   web:
+    driver: local
+    driver_opts:
+      o: 'bind'
+      type : "none"
+      device: '/home/mortiz-d/data/web'
 networks:
   42_network:
