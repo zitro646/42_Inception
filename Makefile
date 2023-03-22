@@ -25,18 +25,11 @@ LIGHT_GREEN = @echo "\033[1;32m"
 LIGHT_CYAN = @echo "\033[1;36m"
 LIGHT_PURPLE = @echo "\033[1;35m"
 
-# VARIABLES #
-LISTA = ""
-# PATHs #
-DIR = /file1
-# SOURCES #
-SRC = /
-
-# RULES #
-
+USER_NAME = ${USER}
 
 all:
 	$(CYAN) RUNNING DOCKER-COMPOSE $(RESET)
+	mkdir -p /home/$(USER_NAME)/data/web /home/$(USER_NAME)/data/mysql
 	sudo docker compose up -d
 	$(GREEN) DOCKER COMPOSE-EXECUTED $(RESET)
 
@@ -47,6 +40,7 @@ purge:
 	sudo docker system prune -f
 	sudo docker rmi $(shell sudo docker image ls -q)
 	sudo docker volume rm $(shell sudo docker volume ls -q)
+	sudo rm -rf /home/${USER_NAME}/data/web /home/${USER_NAME}/data/mysql
 
 ps:
 	sudo docker compose ps
