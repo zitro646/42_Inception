@@ -1,8 +1,8 @@
-version : "3.5"
+version : "3"
 services :
   mariadb :  
     build :
-      context : "./srcs/mysql"
+      context : "./srcs/requirements/mysql"
       args :
         MYSQL_DATABASE_NAME : $MYSQL_DATABASE_NAME
         MYSQL_ADMIN_USER    : $MYSQL_ADMIN_USER
@@ -17,7 +17,7 @@ services :
       - 42_network
   wordpress :
     build : 
-      context : "./srcs/wordpress"
+      context : "./srcs/requirements/wordpress"
     container_name : wordpress
     env_file: .env
     restart : "always"
@@ -29,12 +29,10 @@ services :
       - 42_network
   nginx :  
     build :
-      context : "./srcs/nginx"
+      context : "./srcs/requirements/nginx"
     container_name : nginx
     depends_on :
       - wordpress 
-    links :
-      - wordpress
     restart : "always"
     volumes :
       - web:/var/www/html

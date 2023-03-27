@@ -27,16 +27,17 @@ LIGHT_PURPLE = @echo "\033[1;35m"
 
 USER_NAME = ${USER}
 
+
 all:
 	$(CYAN) RUNNING DOCKER-COMPOSE $(RESET)
 	mkdir -p /home/$(USER_NAME)/data/web /home/$(USER_NAME)/data/mysql
-	sudo docker compose up -d
+	sudo docker compose -f ./srcs/docker-compose.yml up -d
 	$(GREEN) DOCKER COMPOSE-EXECUTED $(RESET)
 
 $(MAKE): make
 
 purge:
-	sudo docker compose down
+	sudo docker compose -f ./srcs/docker-compose.yml down
 	sudo docker system prune -f
 	sudo docker rmi $(shell sudo docker image ls -q)
 	sudo docker volume rm $(shell sudo docker volume ls -q)
@@ -55,7 +56,7 @@ list:
 
 clean:
 	$(PURPLE) CLEANING DOCKER-COMPOS $(RESET)
-	sudo docker compose down
+	sudo docker compose -f ./srcs/docker-compose.yml down
 	$(LIGHT_PURPLE) DOCKER-COMPOS CLEANED $(RESET)
 
 
